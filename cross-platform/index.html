@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wired Slides</title>
+  </head>
+  <body>
+    <div id="app">
+      <nav id="menubar" role="menubar" aria-label="Menu"></nav>
+      <div id="ribbon" role="toolbar" aria-label="Ribbon"></div>
+      <div id="workspace">
+        <aside id="navigator" aria-label="Slides"></aside>
+        <main id="main">
+          <div id="stage"></div>
+          <div id="notes-splitter" role="separator" aria-orientation="horizontal"></div>
+          <div id="notes"><textarea id="notes-text" placeholder="Click to add notes" aria-label="Speaker notes" spellcheck="true"></textarea></div>
+        </main>
+        <aside id="sidepane" hidden></aside>
+      </div>
+      <footer id="statusbar"></footer>
+    </div>
+    <div id="print-root" aria-hidden="true"></div>
+    <dialog id="dialog"></dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
