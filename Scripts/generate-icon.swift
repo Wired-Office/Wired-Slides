@@ -7,7 +7,8 @@
 // Design (matches LBrowser, Wired Paper and Wired Grid): a white squircle, a
 // dot-matrix presentation screen on its stand — a title, bullet lines and a
 // small bar chart on the slide — and a single orange dot.
-// A dark variant (charcoal squircle, light ink) is used in Dark Mode.
+// A dark variant (charcoal squircle, light ink) is used in Dark Mode, and also
+// written as an image set (AppIconDark) that the app shows in the Dock in Dark Mode.
 
 import AppKit
 
@@ -139,6 +140,20 @@ for entry in entries {
     images.append(["filename": name, "idiom": "mac", "scale": "\(entry.scale)x", "size": "\(entry.size)x\(entry.size)"])
 }
 try writeJSON(["images": images, "info": ["author": "xcode", "version": 1]], to: appIconSet.appendingPathComponent("Contents.json"))
+
+// The dark icon as a plain image, for switching the Dock icon at run time
+// (AppIconAppearance); macOS ignores dark appearances in an .appiconset.
+let darkImageSet = resources.appendingPathComponent("Assets.xcassets/AppIconDark.imageset")
+try FileManager.default.createDirectory(at: darkImageSet, withIntermediateDirectories: true)
+var darkImages: [[String: String]] = []
+for scale in [1, 2] {
+    let name = "icon_dark_512x512\(scale == 2 ? "@2x" : "").png"
+    let pixels = 512 * scale
+    try renderPNG(pixels: pixels) { drawIcon(in: $0, size: CGFloat(pixels), palette: dark) }
+        .write(to: darkImageSet.appendingPathComponent(name))
+    darkImages.append(["filename": name, "idiom": "mac", "scale": "\(scale)x"])
+}
+try writeJSON(["images": darkImages, "info": ["author": "xcode", "version": 1]], to: darkImageSet.appendingPathComponent("Contents.json"))
 
 // The Icon Composer icon: a tile fill and two flat layers, each recolored for Dark Mode.
 let assets = iconBundle.appendingPathComponent("Assets")
