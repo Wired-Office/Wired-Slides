@@ -31,7 +31,7 @@ xcodebuild -project WiredSlides.xcodeproj -scheme WiredSlides build
 xcodebuild -project WiredSlides.xcodeproj -scheme WiredSlides test
 ```
 
-The project uses file-system-synchronized groups, so new source files placed under `WiredSlides/` are picked up automatically. Regenerate the app icon with `swift Scripts/generate-icon.swift`. Build the `.dmg` with `Scripts/make-dmg.sh`.
+The project uses file-system-synchronized groups, so new source files placed under `WiredSlides/` are picked up automatically. Regenerate the app icon (the light/dark `AppIcon.icon` for macOS 26+ and the light `AppIcon.appiconset` fallback for macOS 15) with `swift Scripts/generate-icon.swift`. Build the `.dmg` with `Scripts/make-dmg.sh`.
 
 ## Building the Windows and Linux app
 
